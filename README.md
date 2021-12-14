@@ -62,13 +62,13 @@ c троттлингом запросов к API и логированием в 
 
 Установка через composer:
 ```
-$ composer require PavloKrostylov/yclients-api-php:"~1.7"
+$ composer require pavlokrostylov/yclients-api-php:"~1.7"
 ```
 
 или добавить
 
 ```
-"PavloKrostylov/yclients-api-php": "~1.7"
+"pavlokrostylov/yclients-api-php": "~1.7"
 ```
 
 в секцию require файла composer.json.
