@@ -1,18 +1,18 @@
 {
-    "name": "andrey-tech/yclients-api-php",
+    "name": "PavloKrostylov/yclients-api-php",
     "description": "Обертка для работы с API YCLIENTS v2.0 c троттлингом запросов и логированием в файл",
     "keywords": [ "yclients", "api", "api-wrapper", "throttling", "logging" ],
-    "homepage": "https://github.com/andrey-tech/yclients-api-php",
+    "homepage": "https://github.com/PavloKrostylov/yclients-api-php",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
         {
-            "name": "andrey-tech",
-            "homepage": "https://github.com/andrey-tech/",
+            "name": "PavloKrostylov",
+            "homepage": "https://github.com/PavloKrostylov/",
             "role": "Developer"
         },
         {
-            "name": "Andrey Tyshev",
+            "name": "Pavlo Krostylov",
             "role": "Developer"
         }
     ],
