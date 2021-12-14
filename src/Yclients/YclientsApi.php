@@ -13,7 +13,7 @@
  * @see https://github.com/andrey-tech/yclients-api-php
  * @license MIT
  *
- * @version 1.7.0
+ * @version 1.7.1
  *
  * v0.1.0 (27.05.2019) Оригинальная версия от Andrey Tyshev
  * v1.0.0 (27.05.2019) Добавлено:
@@ -32,6 +32,7 @@
  * v1.5.0 (12.06.2020) Добавлено логирование в файл или STDOUT
  * v1.6.0 (12.06.2020) Добавлено свойство $limitCount
  * v1.7.0 (14.06.2020) Добавлено свойство $curlConnectTimeout
+ * v1.7.1 (14.12.2021) Исправлены ошибки в методах getClients() и getCompanies()
  *
  */
 
@@ -555,7 +556,9 @@ class YclientsApi
         $moderated = null,
         $forBooking = null,
         $my = null,
-        $userToken = null
+        $userToken = null,
+        $page = null,
+        $count = null
     ) {
         if ($my && !$userToken) {
             throw new YclientsException('getCompanies() требует обязательный 6-ой аргумент, если установле 5-й аргумент');
@@ -582,6 +585,14 @@ class YclientsApi
 
         if ($my !== null) {
             $parameters['my'] = $my;
+        }
+
+        if ($page !== null) {
+            $parameters['page'] = $page;
+        }
+
+        if ($count !== null) {
+            $parameters['count'] = $count;
         }
 
         return $this->request('companies', $parameters, self::METHOD_GET, $userToken ?: true);
@@ -969,10 +980,10 @@ class YclientsApi
         }
 
         if ($count !== null) {
-            $parameters['count'] = $count;
+            $parameters['page_size'] = $count;
         }
-
-        return $this->request('clients/' . $companyId, $parameters, self::METHOD_GET, $userToken);
+		
+        return $this->request('company/'.$companyId.'/clients/search', $parameters, self::METHOD_POST, $userToken);
     }
 
     /**
