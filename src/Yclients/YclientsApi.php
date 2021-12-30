@@ -13,7 +13,7 @@
  * @see https://github.com/andrey-tech/yclients-api-php
  * @license MIT
  *
- * @version 1.7.1
+ * @version 1.7.2
  *
  * v0.1.0 (27.05.2019) Оригинальная версия от Andrey Tyshev
  * v1.0.0 (27.05.2019) Добавлено:
@@ -33,6 +33,7 @@
  * v1.6.0 (12.06.2020) Добавлено свойство $limitCount
  * v1.7.0 (14.06.2020) Добавлено свойство $curlConnectTimeout
  * v1.7.1 (14.12.2021) Исправлены ошибки в методах getClients() и getCompanies()
+ * v1.7.2 (30.12.2021) Изменены параметры getClients()
  *
  */
 
@@ -942,47 +943,14 @@ class YclientsApi
      *
      * @param integer $companyId - ID компании
      * @param string $userToken - Токен для авторизации пользователя
-     * @param string $fullname
-     * @param string $phone
-     * @param string $email
-     * @param string $page
-     * @param string $count
+     * @param array $parameters
      * @return array
      * @access public
      * @see http://docs.yclients.apiary.io/#reference/7/0/0
      * @throws YclientsException
      */
-    public function getClients(
-        $companyId,
-        $userToken,
-        $fullname = null,
-        $phone = null,
-        $email = null,
-        $page = null,
-        $count = null
-    ) {
-        $parameters = [];
-
-        if ($fullname !== null) {
-            $parameters['fullname'] = $fullname;
-        }
-
-        if ($phone !== null) {
-            $parameters['phone'] = $phone;
-        }
-
-        if ($email !== null) {
-            $parameters['email'] = $email;
-        }
-
-        if ($page !== null) {
-            $parameters['page'] = $page;
-        }
-
-        if ($count !== null) {
-            $parameters['page_size'] = $count;
-        }
-		
+    public function getClients($companyId, $userToken, $parameters = []) 
+	{		
         return $this->request('company/'.$companyId.'/clients/search', $parameters, self::METHOD_POST, $userToken);
     }
 
