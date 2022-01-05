@@ -13,7 +13,7 @@
  * @see https://github.com/andrey-tech/yclients-api-php
  * @license MIT
  *
- * @version 1.7.2
+ * @version 1.7.3
  *
  * v0.1.0 (27.05.2019) Оригинальная версия от Andrey Tyshev
  * v1.0.0 (27.05.2019) Добавлено:
