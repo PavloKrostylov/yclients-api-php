@@ -34,6 +34,7 @@
  * v1.7.0 (14.06.2020) Добавлено свойство $curlConnectTimeout
  * v1.7.1 (14.12.2021) Исправлены ошибки в методах getClients() и getCompanies()
  * v1.7.2 (30.12.2021) Изменены параметры getClients()
+ * v1.7.3 (05.01.2022) Изменены параметры postClients()
  *
  */
 
@@ -780,7 +781,7 @@ class YclientsApi
             $parameters['category_id'] = $categoryId;
         }
 
-        return $this->request('services/' . $companyId . '/' . $serviceId, $parameters);
+        return $this->request('company/' . $companyId . '/services/' . $serviceId, $parameters);
     }
 
     /**
@@ -967,15 +968,8 @@ class YclientsApi
      * @see http://docs.yclients.apiary.io/#reference/7/0/1
      * @throws YclientsException
      */
-    public function postClients($companyId, $name, $phone, $userToken, array $fields = [])
+    public function postClients($companyId, $userToken, array $parameters = [])
     {
-        $parameters = [
-            'name' => $name,
-            'phone' => $phone,
-        ];
-
-        $parameters = array_merge($parameters, $fields);
-
         return $this->request('clients/' . $companyId, $parameters, self::METHOD_POST, $userToken);
     }
 
