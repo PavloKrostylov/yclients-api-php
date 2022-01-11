@@ -35,6 +35,7 @@
  * v1.7.1 (14.12.2021) Исправлены ошибки в методах getClients() и getCompanies()
  * v1.7.2 (30.12.2021) Изменены параметры getClients()
  * v1.7.3 (05.01.2022) Изменены параметры postClients()
+ * v1.7.4 (11.01.2022) Изменены параметры postRecords() 
  *
  */
 
@@ -1126,69 +1127,8 @@ class YclientsApi
     public function postRecords(
         $companyId,
         $userToken,
-        $staffId,
-        $services,
-        $client,
-        \DateTime $datetime,
-        $seanceLength,
-        $saveIfBusy,
-        $sendSms,
-        $comment = null,
-        $smsRemainHours = null,
-        $emailRemainHours = null,
-        $apiId = null,
-        $attendance = null
+		array $parameters      
     ) {
-        $parameters = [];
-
-        if ($staffId !== null) {
-            $parameters['staff_id'] = $staffId;
-        }
-
-        if ($services !== null) {
-            $parameters['services'] = $services;
-        }
-
-        if ($client !== null) {
-            $parameters['client'] = $client;
-        }
-
-        if ($datetime !== null) {
-            $parameters['datetime'] = $datetime->format(\DateTime::ISO8601);
-        }
-
-        if ($seanceLength !== null) {
-            $parameters['seance_length'] = $seanceLength;
-        }
-
-        if ($saveIfBusy !== null) {
-            $parameters['save_if_busy'] = $saveIfBusy;
-        }
-
-        if ($sendSms !== null) {
-            $parameters['send_sms'] = $sendSms;
-        }
-
-        if ($comment !== null) {
-            $parameters['comment'] = $comment;
-        }
-
-        if ($smsRemainHours !== null) {
-            $parameters['sms_remain_hours'] = $smsRemainHours;
-        }
-
-        if ($emailRemainHours !== null) {
-            $parameters['email_remain_hours'] = $emailRemainHours;
-        }
-
-        if ($apiId !== null) {
-            $parameters['api_id'] = $apiId;
-        }
-
-        if ($attendance !== null) {
-            $parameters['attendance'] = $attendance;
-        }
-
         return $this->request('records/' . $companyId, $parameters, self::METHOD_POST, $userToken);
     }
 
