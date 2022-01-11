@@ -3,7 +3,6 @@
     "description": "Обертка для работы с API YCLIENTS v2.0 c троттлингом запросов и логированием в файл",
     "keywords": [ "yclients", "api", "api-wrapper", "throttling", "logging" ],
     "homepage": "https://github.com/pavlokrostylov/yclients-api-php",
-    "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
         {
@@ -28,5 +27,6 @@
         "psr-4": {
             "Yclients\\": "src/Yclients"
         }
-    }
+    },
+	"minimum-stability": "dev"
 }
