@@ -782,7 +782,7 @@ class YclientsApi
             $parameters['category_id'] = $categoryId;
         }
 
-        return $this->request('company/' . $companyId . '/services/' . $serviceId, $parameters);
+        return $this->request('services/' . $companyId . '/' . $serviceId, $parameters);
     }
 
     /**
