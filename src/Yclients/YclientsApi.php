@@ -13,7 +13,7 @@
  * @see https://github.com/andrey-tech/yclients-api-php
  * @license MIT
  *
- * @version 1.7.4
+ * @version 1.7.5
  *
  * v0.1.0 (27.05.2019) Оригинальная версия от Andrey Tyshev
  * v1.0.0 (27.05.2019) Добавлено:
@@ -36,6 +36,7 @@
  * v1.7.2 (30.12.2021) Изменены параметры getClients()
  * v1.7.3 (05.01.2022) Изменены параметры postClients()
  * v1.7.4 (11.01.2022) Изменены параметры postRecords() 
+ * v1.7.5 (13.01.2022) Добавлена переменная $userToken в недостающих местах
  *
  */
 
@@ -129,9 +130,9 @@ class YclientsApi
      * @see http://docs.yclients.apiary.io/#reference/-/0/0
      * @throws YclientsException
      */
-    public function getBookform($id)
+    public function getBookform($id, $userToken = NULL)
     {
-        return $this->request('bookform/' . $id);
+        return $this->request('bookform/' . $id, [], self::METHOD_GET, $userToken ?: true);
     }
 
     /**
@@ -143,9 +144,9 @@ class YclientsApi
      * @see http://docs.yclients.apiary.io/#reference/-/1/0
      * @throws YclientsException
      */
-    public function getI18n($locale = 'ru-RU')
+    public function getI18n($locale = 'ru-RU', $userToken = NULL)
     {
-        return $this->request('i18n/' . $locale);
+        return $this->request('i18n/' . $locale, [], self::METHOD_GET, $userToken ?: true);
     }
 
     /**
@@ -171,7 +172,8 @@ class YclientsApi
         $staffId = null,
         \DateTime $datetime = null,
         array $serviceIds = null,
-        array $eventIds = null
+        array $eventIds = null,
+		$userToken = NULL
     ) {
         $parameters = [];
 
@@ -191,7 +193,7 @@ class YclientsApi
             $parameters['event_ids'] = $eventIds;
         }
 
-        return $this->request('book_services/' . $companyId, $parameters);
+        return $this->request('book_services/' . $companyId, $parameters, self::METHOD_GET, $userToken ?: true);
     }
 
     /**
@@ -220,7 +222,8 @@ class YclientsApi
         \DateTime $datetime = null,
         array $serviceIds = null,
         array $eventIds = null,
-        $withoutSeances = false
+        $withoutSeances = false,
+		$userToken = NULL
     ) {
         $parameters = [];
 
@@ -244,7 +247,7 @@ class YclientsApi
             $parameters['without_seances'] = true;
         }
 
-        return $this->request('book_staff/' . $companyId, $parameters);
+        return $this->request('book_staff/' . $companyId, $parameters, self::METHOD_GET, $userToken ?: true);
     }
 
     /**
@@ -269,7 +272,8 @@ class YclientsApi
         $staffId = null,
         array $serviceIds = null,
         \DateTime $date = null,
-        array $eventIds = null
+        array $eventIds = null,
+		$userToken = NULL
     ) {
         $parameters = [];
 
@@ -289,7 +293,7 @@ class YclientsApi
             $parameters['event_ids'] = $eventIds;
         }
 
-        return $this->request('book_dates/' . $companyId, $parameters);
+        return $this->request('book_dates/' . $companyId, $parameters, self::METHOD_GET, $userToken ?: true);
     }
 
     /**
@@ -314,7 +318,8 @@ class YclientsApi
         $staffId,
         \DateTime $date,
         array $serviceIds = null,
-        array $eventIds = null
+        array $eventIds = null,
+		$userToken = NULL
     ) {
         $parameters = [];
 
@@ -326,7 +331,7 @@ class YclientsApi
             $parameters['event_ids'] = $eventIds;
         }
 
-        return $this->request('book_times/' . $companyId . '/' . $staffId . '/' . $date->format('Y-m-d'), $parameters);
+        return $this->request('book_times/' . $companyId . '/' . $staffId . '/' . $date->format('Y-m-d'), $parameters, self::METHOD_GET, $userToken ?: true);
     }
 
     /**
@@ -340,7 +345,7 @@ class YclientsApi
      * @see http://docs.yclients.apiary.io/#reference/-/6/0
      * @throws YclientsException
      */
-    public function postBookCode($companyId, $phone, $fullname = null)
+    public function postBookCode($companyId, $phone, $fullname = null, $userToken = NULL)
     {
         $parameters = [
             'phone' => $phone
@@ -629,9 +634,9 @@ class YclientsApi
      * @see http://docs.yclients.apiary.io/#reference/2/1/0
      * @throws YclientsException
      */
-    public function getCompany($id)
+    public function getCompany($id, $userToken = NULL)
     {
-        return $this->request('company/' . $id);
+        return $this->request('company/' . $id, [], self::METHOD_GET, $userToken ?: true);
     }
 
     /**
@@ -675,7 +680,7 @@ class YclientsApi
      * @see http://docs.yclients.apiary.io/#reference/3/0/0
      * @throws YclientsException
      */
-    public function getServiceCategories($companyId, $categoryId = null, $staffId = null)
+    public function getServiceCategories($companyId, $categoryId = null, $staffId = null, $userToken = NULL)
     {
         $parameters = [];
 
@@ -683,7 +688,7 @@ class YclientsApi
             $parameters['staff_id'] = $staffId;
         }
 
-        return $this->request('service_categories/' . $companyId . '/' . $categoryId, $parameters);
+        return $this->request('service_categories/' . $companyId . '/' . $categoryId, $parameters, self::METHOD_GET, $userToken ?: true);
     }
 
     /**
@@ -717,9 +722,9 @@ class YclientsApi
      * @see http://docs.yclients.apiary.io/#reference/3/1/0
      * @throws YclientsException
      */
-    public function getServiceCategory($companyId, $categoryId)
+    public function getServiceCategory($companyId, $categoryId, $userToken = NULL)
     {
-        return $this->request('service_category/' . $companyId . '/' . $categoryId);
+        return $this->request('service_category/' . $companyId . '/' . $categoryId, [], self::METHOD_GET, $userToken ?: true);
     }
 
     /**
@@ -770,7 +775,7 @@ class YclientsApi
      * @see http://docs.yclients.apiary.io/#reference/4/0//
      * @throws YclientsException
      */
-    public function getServices($companyId, $serviceId = null, $staffId = null, $categoryId = null)
+    public function getServices($companyId, $serviceId = null, $staffId = null, $categoryId = null, $userToken = NULL)
     {
         $parameters = [];
 
@@ -782,7 +787,7 @@ class YclientsApi
             $parameters['category_id'] = $categoryId;
         }
 
-        return $this->request('services/' . $companyId . '/' . $serviceId, $parameters);
+        return $this->request('company/' . $companyId . '/services/' . $serviceId, $parameters, self::METHOD_GET, $userToken ?: true);
     }
 
     /**
@@ -863,9 +868,9 @@ class YclientsApi
      * @see http://docs.yclients.apiary.io/#reference/5//
      * @throws YclientsException
      */
-    public function getEvents($companyId, $eventId = null)
+    public function getEvents($companyId, $eventId = null, $userToken = NULL)
     {
-        return $this->request('events/' . $companyId . '/' . $eventId);
+        return $this->request('events/' . $companyId . '/' . $eventId, [], self::METHOD_GET, $userToken ?: true);
     }
 
     /**
@@ -878,9 +883,9 @@ class YclientsApi
      * @see http://docs.yclients.apiary.io/#reference/6//
      * @throws YclientsException
      */
-    public function getStaff($companyId, $staffId = null)
+    public function getStaff($companyId, $staffId = null, $userToken = NULL)
     {
-        return $this->request('staff/' . $companyId . '/' . $staffId);
+        return $this->request('staff/' . $companyId . '/' . $staffId, [], self::METHOD_GET, $userToken ?: true);
     }
 
     /**
