@@ -37,6 +37,7 @@
  * v1.7.3 (05.01.2022) Изменены параметры postClients()
  * v1.7.4 (11.01.2022) Изменены параметры postRecords() 
  * v1.7.5 (13.01.2022) Добавлена переменная $userToken в недостающих местах
+ * v1.7.6 (02.06.2022) Изменен адрес API
  *
  */
 
@@ -54,7 +55,7 @@ class YclientsApi
     /*
      * URL для RestAPI
      */
-    const URL = 'https://api.yclients.com/api/v1';
+    const URL = 'https://api.alteg.io/api/v1';
 
     /*
      * Методы, используемые в API
